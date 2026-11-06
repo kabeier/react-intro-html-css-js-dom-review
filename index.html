@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weekend Review: Big Ideas</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#f4f6f9; --grid:#dce3ee; --ink:#1b2230; --muted:#5b6577; --blue:#2552c9; --sticky:#ffe76a; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Atkinson Hyperlegible', system-ui, sans-serif; color: var(--ink); font-size: 18px; line-height: 1.5;
+    background: var(--paper) linear-gradient(var(--grid) 1px, transparent 1px) -1px -1px / 40px 40px,
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px) -1px -1px / 40px 40px; }
+  main { max-width: 900px; margin: 0 auto; padding: 64px 16px 80px; }
+  h1 { font: 800 clamp(40px, 7vw, 72px)/0.95 'Bricolage Grotesque', sans-serif; letter-spacing: -0.03em; margin: 0 0 16px; }
+  .lede { max-width: 60ch; color: var(--muted); font-size: 20px; margin: 0 0 40px; }
+  .date { display: inline-block; font: 700 17px 'Atkinson Hyperlegible', sans-serif; background: var(--ink); color: #fff; padding: 4px 12px; border-radius: 3px; margin: 0 0 14px; }
+  section { background: #fff; border: 2px solid var(--ink); border-radius: 4px; padding: 28px; }
+  h2 { font: 800 30px/1.1 'Bricolage Grotesque', sans-serif; margin: 0 0 6px; letter-spacing: -0.01em; }
+  section > p { margin: 0 0 22px; color: var(--muted); }
+  a.slides { display: block; background: var(--sticky); color: var(--ink); text-decoration: none; padding: 20px 22px; margin-bottom: 22px;
+    transform: rotate(-0.8deg); box-shadow: 0 10px 18px -10px rgb(27 34 48 / 0.45); transition: transform .15s; }
+  a.slides:hover, a.slides:focus-visible { transform: rotate(0deg) translateY(-2px); }
+  a.slides b { display: block; font: 800 26px 'Bricolage Grotesque', sans-serif; }
+  table { border-collapse: collapse; width: 100%; font-size: 17px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  th { color: var(--muted); font-weight: 700; }
+  code { font-size: 0.9em; background: #e8ecf3; padding: 1px 5px; border-radius: 3px; }
+  footer { margin-top: 48px; color: var(--muted); font-size: 16px; }
+  footer a, td a { color: var(--blue); }
+  a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { a.slides { transition: none; } }
+  @media (max-width: 600px) { section { padding: 18px; } table { font-size: 15px; } }
+</style>
+</head>
+<body>
+<main>
+  <p class="date">📅 Weekend of November 7, 2026 · about 20 minutes</p>
+  <h1>Weekend Review: the Big Ideas</h1>
+  <p class="lede">A short recorded review of HTML and CSS, JavaScript and the DOM, React + Vite, and async requests. Nothing new: just the six ideas you'll use in every React lesson from here on.</p>
+
+  <section>
+    <h2>Six big ideas</h2>
+    <p>Watch the video, then flip through the slides. The code on them is the real code from our Pokemon app.</p>
+    <a class="slides" href="big-ideas/slides.html" target="_blank" rel="noopener"><b>Open the slides</b>Arrow keys to move, F for fullscreen</a>
+    <table>
+      <tr><th>#</th><th>Big idea</th><th>Re-watch if it's shaky</th></tr>
+      <tr><td>1</td><td>The page is a tree; selectors find things in it</td><td><a href="https://kabeier.github.io/intro-html-css-dom/" target="_blank" rel="noopener">HTML and CSS</a></td></tr>
+      <tr><td>2</td><td>CSS names in React: <code>className</code>, <code>htmlFor</code>, <code>style={{ }}</code></td><td><a href="https://kabeier.github.io/intro-react/lecture-1-react-vite/slides.html" target="_blank" rel="noopener">React + Vite</a></td></tr>
+      <tr><td>3</td><td>Forms: the submit event and <code>preventDefault()</code></td><td><a href="https://kabeier.github.io/intro-html-css-dom/" target="_blank" rel="noopener">JavaScript and the DOM</a></td></tr>
+      <tr><td>4</td><td>Event → data → page</td><td><a href="https://kabeier.github.io/intro-html-css-dom/" target="_blank" rel="noopener">JavaScript and the DOM</a></td></tr>
+      <tr><td>5</td><td>A component is a function that returns JSX</td><td><a href="https://kabeier.github.io/intro-react/lecture-1-react-vite/slides.html" target="_blank" rel="noopener">React + Vite</a></td></tr>
+      <tr><td>6</td><td>Requests take time, and they can fail</td><td><a href="https://kabeier.github.io/intro-react/lecture-2-async-requests/slides.html" target="_blank" rel="noopener">Async requests</a></td></tr>
+    </table>
+  </section>
+
+  <footer>Next up: <a href="https://kabeier.github.io/intro-react/" target="_blank" rel="noopener">React: the Pokemon Project</a> (Cypress Monday, hooks Tuesday) · <a href="https://kabeier.github.io/cp-lectures/" target="_blank" rel="noopener">All lecture sites</a></footer>
+</main>
+</body>
+</html>

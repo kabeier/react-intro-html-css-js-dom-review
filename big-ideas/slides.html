@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Big Ideas Review · HTML, CSS, DOM, React day 1</title>
+<link rel="stylesheet" href="../shared/deck.css?v=1">
+<style>
+  pre { font-size: 22px; }
+  pre b { color: #ffe76a; font-weight: 600; }
+  .slide h2 { margin-bottom: 28px; }
+  .next { font: 600 24px var(--body); margin-top: 22px; max-width: none; }
+  .next .tag { font-size: 18px; }
+  .cols pre { min-height: 100%; }
+  .map td:first-child { white-space: nowrap; }
+</style>
+</head>
+<body data-minutes="20">
+<div class="stage">
+
+<section class="slide title" data-seg="Open" data-at="0">
+  <div class="kicker">Front-End · Weekend review · about 20 minutes</div>
+  <h1>Six big ideas you'll use in every React lesson</h1>
+  <p class="sub">From HTML and CSS, JavaScript and the DOM, React + Vite, and async requests. Nothing new today: just the parts that matter most.</p>
+  <aside class="notes">
+    <p class="plan"><b>The plan:</b> Say what this video is: a recap of the big ideas from the last four lessons, nothing new.</p>
+    <ul>
+      <li>Say: "No new material. If you watch this and think <b>'yep, I know that'</b>, great."</li>
+      <li>Say: "If any slide feels shaky, that's the lesson to re-watch before Monday."</li>
+      <li>Say: "Pause any time. The code on the slides is the real code from our Pokemon app."</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-seg="Open" data-at="1">
+  <h2>The six ideas, and where they came from</h2>
+  <table class="dbt small map">
+    <tr><th>#</th><th>Big idea</th><th>Lesson</th></tr>
+    <tr><td>1</td><td>The page is a <b>tree</b>; selectors find things in it</td><td>HTML and CSS</td></tr>
+    <tr><td>2</td><td>CSS names change a little in React</td><td>CSS → React + Vite</td></tr>
+    <tr><td>3</td><td>Forms: the <b>submit</b> event and <b>preventDefault</b></td><td>JS and the DOM</td></tr>
+    <tr><td>4</td><td><b>Event → data → page</b>: by hand, or React does it</td><td>JS and the DOM</td></tr>
+    <tr><td>5</td><td>A component is a <b>function that returns JSX</b></td><td>React + Vite</td></tr>
+    <tr><td>6</td><td>Requests <b>take time</b> and can <b>fail</b></td><td>Async requests</td></tr>
+  </table>
+  <p class="bottomline">Each one comes back again and again: Cypress Monday, hooks Tuesday.</p>
+  <aside class="notes">
+    <p class="plan"><b>The plan:</b> A quick map of the six ideas, so students know where this video is going.</p>
+    <ul>
+      <li>Point at the <b>Lesson</b> column: "If one of these feels shaky, that's the lesson to re-watch."</li>
+      <li>Don't explain them yet. Just read the list. About 1 minute.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-seg="1 · The tree" data-at="2">
+  <h2>1 · The page is a tree. Selectors find things in it.</h2>
+  <div class="cols">
+    <pre>&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Pokemon Project&lt;/h1&gt;
+  &lt;/header&gt;
+  &lt;form&gt; … &lt;/form&gt;
+  &lt;div <b>id="poke-container"</b>&gt;
+    &lt;div <b>class="card"</b>&gt; … &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;</pre>
+    <table class="dbt small">
+      <tr><th>Selector</th><th>Finds</th></tr>
+      <tr><td><code>h1</code></td><td>every &lt;h1&gt;</td></tr>
+      <tr><td><code>.card</code></td><td>every class="card"</td></tr>
+      <tr><td><code>#poke-container</code></td><td>the one id</td></tr>
+      <tr><td><code>#poke-container .card</code></td><td>cards inside it</td></tr>
+    </table>
+  </div>
+  <p class="next"><span class="tag blue">You'll use it in</span> CSS files, <code>querySelector</code>, and every <b>Cypress</b> test: <code>cy.get('#poke-container')</code></p>
+  <aside class="notes">
+    <p class="plan"><b>The plan:</b> HTML is nested boxes (a tree), and one set of selectors finds things in it everywhere.</p>
+    <ul>
+      <li>Point at the <b>indents</b> on the left: header and form sit inside body; the cards sit inside poke-container. That nesting is the tree.</li>
+      <li>Point at the <b>table</b>: tag, .class, #id. The same strings work in CSS, in querySelector and in Cypress.</li>
+      <li>Say: "The browser turns this HTML into the <b>DOM</b>: a tree of objects JavaScript can change."</li>
+      <li>Say: "Learn selectors once, use them all course long. Cypress tests are mostly selectors."</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-seg="2 · CSS in React" data-at="5">
+  <h2>2 · CSS names in React</h2>
+  <table class="dbt small">
+    <tr><th>HTML and CSS</th><th>React (JSX)</th><th>Why</th></tr>
+    <tr><td><code>class="card"</code></td><td class="pk"><code>className="card"</code></td><td><code>class</code> is a JavaScript word</td></tr>
+    <tr><td><code>for="pokemon-name"</code></td><td class="pk"><code>htmlFor="pokemon-name"</code></td><td><code>for</code> is a JavaScript word</td></tr>
+    <tr><td><code>style="color: red"</code></td><td class="pk"><code>style={{ color: "red" }}</code></td><td>style is an <b>object</b></td></tr>
+    <tr><td><code>background-color: blue</code></td><td class="pk"><code>backgroundColor: "blue"</code></td><td>dashes → <b>camelCase</b></td></tr>
+    <tr><td><code>font-size: 24px</code></td><td class="pk"><code>fontSize: 24</code></td><td>a number means <b>px</b></td></tr>
+    <tr><td><code>onclick="go()"</code></td><td class="pk"><code>onClick={go}</code></td><td>camelCase, pass the <b>function</b></td></tr>
+  </table>
+  <p class="next"><span class="tag blue">Still the same</span> CSS files: <code>import './App.css'</code>, and the selectors in it don't change.</p>
+  <aside class="notes">
+    <p class="plan"><b>The plan:</b> The six renames from HTML/CSS to JSX. Students will type these every day.</p>
+    <ul>
+      <li>Read row by row. Point at the yellow <b>React</b> column each time.</li>
+      <li>Rows 1–2: JSX is JavaScript, and <b>class</b> and <b>for</b> already mean something in JavaScript, so React renamed them.</li>
+      <li>Row 3: <b>two</b> braces. The outer {} = "JavaScript here"; the inner {} = the object.</li>
+      <li>Row 6: no quotes and no (). <code>onClick={go()}</code> would run it right away, while drawing the page.</li>
+      <li>Say: "Forget one of these and React often warns in the console. Check it first."</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-seg="3 · Forms" data-at="8">
+  <h2>3 · A form sends a submit event. Stop the reload.</h2>
+  <div class="cols wide-left">
+    <pre>const handleSubmit = (event) =&gt; {
+  <b>event.preventDefault()</b>
+  const data = Object.fromEntries(
+    <b>new FormData(event.target)</b>
+  )
+  const name = data.name.trim().toLowerCase()
+  if (!name) return
+  getPokemonData(name)
+  event.target.reset()
+}
+
+&lt;form <b>onSubmit</b>={(event) =&gt; handleSubmit(event)}&gt;</pre>
+    <div>
+      <ul class="small">
+        <li><b>submit</b>, not click: Enter works too</li>
+        <li><b>preventDefault()</b>: no page reload</li>
+        <li><b>event.target</b> = the form</li>
+        <li>Each input's <b>name</b> becomes a key: <code>data.name</code></li>
+      </ul>
+    </div>
+  </div>
+  <p class="next"><span class="tag blue">Same in React</span> This came from the DOM lesson, and it's in our React app now.</p>
+  <aside class="notes">
+    <p class="plan"><b>The plan:</b> Our real handleSubmit from App.jsx, and the four DOM ideas inside it.</p>
+    <ul>
+      <li>Point at <b>preventDefault()</b> (yellow): without it, the browser reloads the page and our cards vanish.</li>
+      <li>Point at <b>new FormData(event.target)</b>: event.target is the form. Object.fromEntries turns it into <code>{ name: "pikachu" }</code>.</li>
+      <li>Point at <b>onSubmit</b> at the bottom: we listen on the form, not the button, so pressing Enter works too.</li>
+      <li>Say: "This is the event object from the DOM lesson. React passes us the same kind of event."</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-seg="4 · Event → data → page" data-at="11">
+  <h2>4 · Event → data → page</h2>
+  <div class="cols">
+    <div class="card"><h3>By hand (what we did)</h3>
+<pre style="font-size:19px;margin-top:14px">const card = <b>document.createElement</b>("div")
+card.className = "card"
+card.id = `${data.name}-card`
+…
+document.querySelector("#poke-container")
+  .<b>appendChild</b>(card)</pre>
+      <p style="margin-top:14px">We find the spot, build each element, and stick it on the page.</p>
+    </div>
+    <div class="card blue"><h3>The React way (coming)</h3>
+      <p>We keep the <b>data</b>: a list of Pokemon.</p>
+      <p>The JSX <b>describes</b> the page for that data.</p>
+      <p>The data changes → <b>React redraws</b> the page.</p>
+    </div>
+  </div>
+  <p class="bottomline">React doesn't know about cards we add by hand. That's <code>useState</code>, on Tuesday.</p>
+  <aside class="notes">
+    <p class="plan"><b>The plan:</b> The most important idea: something happens, the data changes, the page shows it. Left is the DOM way we used; right is where React takes us.</p>
+    <ul>
+      <li>Point at <b>createElement</b> and <b>appendChild</b> on the left: our real generateCard from App.jsx. Every step is by hand.</li>
+      <li>Say: "It works, but React has no idea these cards exist. It didn't draw them."</li>
+      <li>Point at the <b>blue card</b>: in React we change the <b>data</b>, and React works out the page changes. The virtual DOM from lecture 1 does the comparing.</li>
+      <li>Say: "No code for this yet. useState is Tuesday's lesson (Unit 4). Just remember the arrow: event → data → page."</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-seg="5 · Components" data-at="14">
+  <h2>5 · A component is a function that returns JSX</h2>
+  <div class="cols wide-left">
+    <pre>import './App.css'
+
+<b>function App()</b> {
+  let message = "Hello Pokemon trainers"
+  const sayHello = () =&gt; "Hello from a function"
+  <b>return</b> (
+    <b>&lt;&gt;</b>
+      &lt;h1&gt;Pokemon Project&lt;/h1&gt;
+      &lt;p className="myText"&gt;<b>{message}</b>&lt;/p&gt;
+      &lt;p&gt;<b>{sayHello()}</b>&lt;/p&gt;
+    <b>&lt;/&gt;</b>
+  )
+}
+
+<b>export default App</b></pre>
+    <ul class="small">
+      <li>The name starts with a <b>Capital</b>: <code>&lt;App /&gt;</code></li>
+      <li>Return <b>one</b> parent: <code>&lt;&gt; &lt;/&gt;</code> is a wrapper that adds nothing to the page</li>
+      <li><b>{ }</b> = "JavaScript here": values and calls</li>
+      <li><b>export</b> it, so <code>main.jsx</code> can put it into <code>&lt;div id="root"&gt;</code></li>
+    </ul>
+  </div>
+  <aside class="notes">
+    <p class="plan"><b>The plan:</b> Our first App.jsx from React + Vite: what makes a function a component.</p>
+    <ul>
+      <li>Point at <b>function App()</b>: just a JavaScript function. Capital A, so React knows it's a component and not an HTML tag.</li>
+      <li>Point at <b>return ( &lt;&gt; … &lt;/&gt; )</b>: one parent. The empty tags are a Fragment.</li>
+      <li>Point at <b>{message}</b> and <b>{sayHello()}</b>: braces drop JavaScript into the markup. Here we call the function, because we want what it returns.</li>
+      <li>Point at <b>export default</b>: main.jsx imports App and renders it into the root div in index.html.</li>
+      <li>Say: "Every new piece of the app, the card, the form, the pages, will be one of these."</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-seg="6 · Requests" data-at="17">
+  <h2>6 · Requests take time, and they can fail</h2>
+  <div class="cols wide-left">
+    <pre>const getPokemonData = <b>async</b> (name) =&gt; {
+  <b>try</b> {
+    const response = <b>await</b> axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${name}`
+    )
+    generateCard(response.data)
+  } <b>catch</b> (error) {
+    alert("Pokemon Does not Exist")
+  } <b>finally</b> {
+    console.log("Request completed")
+  }
+}</pre>
+    <ul class="small">
+      <li><b>await</b> waits for the answer. It only works inside an <b>async</b> function</li>
+      <li>The Pokemon is in <b>response.data</b></li>
+      <li>A bad name (<code>pikachoo</code>) is a <b>404</b> → <b>catch</b></li>
+      <li><b>finally</b> runs either way</li>
+    </ul>
+  </div>
+  <p class="next"><span class="tag blue">You'll use it in</span> <code>useEffect</code>, the router's Pokemon pages, and the Cypress tests that call the real PokeAPI.</p>
+  <aside class="notes">
+    <p class="plan"><b>The plan:</b> Our real getPokemonData: the request starts, the page keeps going, and we handle the answer or the error later.</p>
+    <ul>
+      <li>Point at <b>async</b> and <b>await</b>: await pauses this function only, not the page.</li>
+      <li>Point at <b>response.data</b>: axios already turned the JSON into an object.</li>
+      <li>Point at <b>catch</b>: a misspelled name returns 404, so axios throws and we tell the user.</li>
+      <li>Say: "Same promise as .then / .catch / .finally. Most code you'll read uses await."</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-seg="Wrap up" data-at="19">
+  <h2>Check yourself before Monday</h2>
+  <ol class="steps small">
+    <li>What does <code>#poke-container .card</code> find?</li>
+    <li>How do you write <code>class</code>, <code>for</code> and <code>background-color</code> in JSX?</li>
+    <li>Why do we call <code>event.preventDefault()</code> on a submit?</li>
+    <li>Why doesn't React know about our cards yet?</li>
+    <li>What does <code>{ }</code> mean inside JSX?</li>
+    <li>When does a <code>catch</code> block run?</li>
+  </ol>
+  <p class="bottomline">Stuck on one? Re-watch that lesson's slides before Monday.</p>
+  <aside class="notes">
+    <p class="plan"><b>The plan:</b> Six quick questions, one per big idea. Students pause and answer them in their head.</p>
+    <ul>
+      <li>Say: "Pause the video and answer all six out loud."</li>
+      <li>Answers, if you want to give them after a pause:
+        <ol>
+          <li>The cards inside the element with id poke-container.</li>
+          <li><code>className</code>, <code>htmlFor</code>, <code>backgroundColor</code>.</li>
+          <li>To stop the browser reloading the page.</li>
+          <li>We added them with the DOM, by hand. React didn't draw them.</li>
+          <li>JavaScript goes here.</li>
+          <li>When the request fails, e.g. a 404 for a bad name.</li>
+        </ol>
+      </li>
+      <li>Say: "See you Monday."</li>
+    </ul>
+  </aside>
+</section>
+
+</div>
+<script src="../shared/deck.js?v=2"></script>
+</body>
+</html>
